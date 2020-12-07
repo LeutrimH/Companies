@@ -1,0 +1,31 @@
+﻿@model PersistentModel;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="person_list">
+    <table id="person_list_table" class="table">
+        <thead>
+            <tr>
+                <th>Person</th>
+                <th>Job</th>
+                <th>Salary</th>
+                <th>Deviation</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in Model.persons)
+            {
+            <tr id="person_row_@person.id">
+                <td>@person.name</td>
+                <td>@person.job.name</td>
+                <td>@person.salary</td>
+                <td>@String.Format("{0:+#.00;-#.00;+0.00}%", 100 * ((person.salary / person.job.averageSalary) - 1))</td>
+                <td><a asp-controller="Home" asp-action="PersonRemove" asp-route-id="@person.id">remove</a></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

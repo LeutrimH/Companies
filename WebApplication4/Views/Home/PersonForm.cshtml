@@ -1,0 +1,21 @@
+﻿@model PersonModel;
+
+@{
+    ViewData["Title"] = "Person Form";
+}
+
+<form id="person_form" method="post" action="/Home/PersonSave">
+    <input type="hidden" name="id" value="@Model.id"/>
+    <p><label for="name">Name: </label><input name="name" value="@Model.name" /></p>
+    <p>
+        <label for="jobId">Job: </label>
+        <select name="jobId">
+            <option value="-1">-- Select a Job --</option>
+            @foreach (var job in PersistentModel.Instance.jobs) {
+                <option value="@job.id">@job.name</option>
+            }
+        </select>
+    </p>
+    <p><label for="salary">Salary: </label><input name="salary"  value="@Model.salary"/></p>
+    <p><button type="submit">Submit</button></p>
+</form>

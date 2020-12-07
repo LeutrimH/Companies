@@ -1,0 +1,26 @@
+﻿@model PersistentModel;
+
+@{
+    ViewData["Title"] = "Job List";
+}
+
+<div id="job_list">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Job</th>
+                <th>Average Salary</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var job in Model.jobs) {
+                <tr>
+                    <td>@job.name</td>
+                    <td>@job.averageSalary</td>
+                    <td><a asp-controller="Home" asp-action="JobRemove" asp-route-id="@job.id">remove</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
